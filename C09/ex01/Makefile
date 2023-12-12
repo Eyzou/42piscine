@@ -1,35 +1,36 @@
-SRC = srcs/ft_putchar.c \
-      srcs/ft_swap.c \
-      srcs/ft_putstr.c \
-      srcs/ft_strlen.c \
-      srcs/ft_strcmp.c
+SRC	= ./srcs/ft_putchar.c ./srcs/ft_swap.c ./srcs/ft_putstr.c ./srcs/ft_strlen.c ./srcs/ft_strcmp.c
 
-OBJS = $(SRC:.c=.o)
+OBJS	= ${SRC:.c=.o}
 
-SRC_DIR = srcs/
+HEAD	= ./includes/
 
-HEADER_DIR = includes/
+NAME	= libft.a
 
-CFLAGS += -Wall -Wextra -Werror
+AR	= ar rcs
 
-CC = gcc
+RM	= rm -f
 
-NAME = libft.a
+LIB	= ranlib
 
-all: $(EXEC)
+GCC	= gcc
 
-$(NAME): lib $(OBJS)
+CFLAGS	= -Wall -Wextra -Werror
 
-$(OBJS): %.o: %.c 
-	$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
+all:	${NAME}
 
-lib: $(OBJS)
-	ar rcs $(NAME) $(OJBS)
-	 
+.c.o:
+	${GCC} ${CFLAGS} -c -I ${HEAD} $< -o ${<:.c=.o}
+
+${NAME}:	${OBJS}
+		${AR} ${NAME} ${OBJS}
+		${LIB} ${NAME}
+
 clean:
-	rm -f $(OBJS) 
+	rm -f ${OBJS}
 
-fclean: clean
-	rm -f $(NAME)
+fclean:	clean
+	rm -f ${NAME}
 
-re: fclean all
+re:	fclean all
+
+.PHONY:	all clean fclean re
