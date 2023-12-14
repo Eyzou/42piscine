@@ -12,39 +12,6 @@
 
 #include "header.h"
 
-void	calculator(int num1, char operator, int num2)
-{
-	if (operator == '+')
-		ft_putnbr(num1 + num2);
-	else if (operator == '-')
-		ft_putnbr(num1 - num2);
-	else if (operator == '/')
-	{
-		if (num2 == 0)
-			write(1, "Stop : division by zero", 23);
-		else
-			ft_putnbr(num1 / num2);
-	}
-	else if (operator == '*')
-		ft_putnbr(num1 * num2);
-	else if (operator == '%')
-	{
-		if (num2 == 0)
-			write(1, "Stop : modulo by zero", 22);
-		else
-			ft_putnbr(num1 % num2);
-	}
-	else
-		write(1, "0", 1);
-}
-
-char	ft_find_operator(char *str)
-{
-	if (str[0] == '\0' || str[1] != '\0')
-		return (0);
-	return (str[0]);
-}
-
 int	main(int argc, char **argv)
 {
 	int		a;
@@ -59,4 +26,5 @@ int	main(int argc, char **argv)
 	b = ft_atoi(argv[3]);
 	operator = ft_find_operator(argv[2]);
 	calculator(a, operator, b);
+	ft_putchar('\n');
 }

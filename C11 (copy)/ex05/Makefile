@@ -1,27 +1,35 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ehamm <marvin@42.fr>                       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/11 09:55:04 by ehamm             #+#    #+#              #
-#    Updated: 2023/12/12 13:51:20 by ehamm            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = do-op
-SRCS = ./srcs/ft_putnbr.c ./srcs/ft_putchar.c ./srcs/ft_atoi.c ./srcs/main.c
-CC = gcc -Wall -Werror -Wextra
-HEADERS = ./includes
+
+SRC = srcs/main.c \
+      srcs/ft_putnbr.c \
+      srcs/ft_putchar.c \
+      srcs/ft_atoi.c \
+      srcs/ft_strlen.c \
+      srcs/ft_find_operator.c \
+      srcs/ft_calculator.c
+      
+OBJS = $(SRC:.c=.o)
+
+HEADER = includes/
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) -o $(NAME) $(SRCS) -I $(HEADERS)
+$(NAME): $(OBJS) compile
+
+$(OBJS): %.o: %.c 
+	$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
+
+compile:
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	@rm -rf $(NAME)
+	rm -f $(OBJS)
 
-re: clean all
+fclean: clean
+	rm -f $(NAME)
 
+re: fclean all

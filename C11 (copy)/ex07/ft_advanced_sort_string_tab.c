@@ -6,7 +6,7 @@
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:55:58 by ehamm             #+#    #+#             */
-/*   Updated: 2023/12/12 14:26:23 by ehamm            ###   ########.fr       */
+/*   Updated: 2023/12/13 10:54:15 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,21 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int	cmp(char *s1, char *s2)
-{
-	while (*s1 && *s2)
-	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		++s1;
-		++s2;
-	}
-	return (*s1 - *s2);
-}
-
-int	get_tab_size(char **tab)
-{
-	int	n;
-
-	n = 0;
-	while (tab[n])
-		++n;
-	return (n);
-}
-
 void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 {
 	int		i;
 	int		j;
-	int		size;
+	int		length;
 	char	*tmp;
 
-	size = get_tab_size(tab);
-	i = 1;
-	while (i < size - 1)
+	length = 0;
+	while (tab[length])
+		length++;
+	i = 0;
+	while (i < length)
 	{
 		j = 0;
-		while (j < size - i)
+		while (j < (length - i) - 1)
 		{
 			if (cmp(tab[j], tab[j + 1]) > 0)
 			{
@@ -62,11 +42,39 @@ void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 	}
 }
 
-/*int	main(int argc, char **argv)
-{
-	int	i;
+/*#include <stdio.h>
 
-	ft_advanced_sort_string_tab(argv, &cmp);
+int     ft_strlen(char *str)
+{
+      	int             i;
+
+        i = 0;
+        while (str[i])
+                i++;
+        return (i);
+}
+
+int     cmp(char *s1, char *s2)
+{
+        int     i;
+
+        i = 0;
+        while (i < ft_strlen(s1) || i < ft_strlen(s2))
+        {
+                if (s1[i] > s2[i])
+                        return (s1[i] - s2[i]);
+                if (s1[i] < s2[i])
+                        return (s1[i] - s2[i]);
+                i++;
+	}
+	return (0);
+}
+
+int     main(int argc, char **argv)
+{
+		int		i;
+
+	ft_advanced_sort_string_tab(argv,&cmp);
 	i = 0;
 	while (++i < argc)
 		printf("%s\n", argv[i]);

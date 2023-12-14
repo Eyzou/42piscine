@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_find_operator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehamm <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 13:55:22 by ehamm             #+#    #+#             */
-/*   Updated: 2023/12/12 13:55:55 by ehamm            ###   ########.fr       */
+/*   Created: 2023/12/13 10:33:35 by ehamm             #+#    #+#             */
+/*   Updated: 2023/12/13 10:33:45 by ehamm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "header.h"
 
-int	ft_atoi(char *str)
+char	ft_find_operator(char *str)
 {
-	int	sign;
-	int	result;
-
-	sign = 1;
-	result = 0;
-	while ((*str == 32) || (*str >= 9 && *str <= 13))
-		str++;
-	while (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = sign * -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	return (result * sign);
+	if (str[0] == '\0' || str[1] != '\0')
+		return (0);
+	return (str[0]);
 }
